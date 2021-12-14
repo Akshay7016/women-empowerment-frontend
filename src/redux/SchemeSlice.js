@@ -11,6 +11,7 @@ const SchemeSlice = createSlice({
         schemeTypeList : [], 
         schemeDateList : [],
         schemeEligibilityList : [],
+        schemeDelete : new SchemeModel(),
     },
 
     reducers: {
@@ -37,6 +38,11 @@ const SchemeSlice = createSlice({
         getSchemeByEligibility : (state, action) => {
             console.log("SchemeSlice reducers getSchemeByEligibility");
             state.schemeEligibilityList = action.payload;
+        },
+
+        deleteSchemeByID : (state, action) => {
+            console.log("SchemeSlice reducers deleteScheme");
+            state.schemeDelete = action.payload;
         }
 
 
@@ -45,5 +51,5 @@ const SchemeSlice = createSlice({
 
 );
 
-export const {getSchemeById, getAllSchemes, getSchemeByType, getSchemeByLaunchDate, getSchemeByEligibility} = SchemeSlice.actions;
+export const {getSchemeById, getAllSchemes, getSchemeByType, getSchemeByLaunchDate, getSchemeByEligibility, deleteSchemeByID} = SchemeSlice.actions;
 export default SchemeSlice.reducer;

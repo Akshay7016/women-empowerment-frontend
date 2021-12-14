@@ -25,4 +25,12 @@ const getSchemeByEligibilityService = (eligibility) => {
     return axios.get(`/viewbyeligibility/${eligibility}`);
 }
 
-export { getSchemeByIdService, getAllSchemeService, getSchemeByTypeService, getSchemeByDateService, getSchemeByEligibilityService};
+
+const deleteSchemeService = (deleteScheme) => {
+    console.log('deleteSchemeService');
+    return axios.delete(`/deleteschemebyid/${deleteScheme}`);
+}
+
+
+
+export { getSchemeByIdService, getAllSchemeService, getSchemeByTypeService, getSchemeByDateService, getSchemeByEligibilityService, deleteSchemeService};

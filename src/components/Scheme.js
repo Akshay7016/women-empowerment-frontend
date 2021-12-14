@@ -1,8 +1,8 @@
-import { getSchemeById, getAllSchemes, getSchemeByType, getSchemeByLaunchDate, getSchemeByEligibility } from "../redux/SchemeSlice";
+import { getSchemeById, getAllSchemes, getSchemeByType, getSchemeByLaunchDate, getSchemeByEligibility, deleteSchemeByID } from "../redux/SchemeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { getSchemeByIdService, getAllSchemeService, getSchemeByTypeService, getSchemeByDateService, getSchemeByEligibilityService } from "../service/SchemeService";
-import SchemeModel from "../model/SchemeModel";
+import { getSchemeByIdService, getAllSchemeService, getSchemeByTypeService, getSchemeByDateService, getSchemeByEligibilityService, deleteSchemeService } from "../service/SchemeService";
+// import SchemeModel from "../model/SchemeModel";
 
 
 
@@ -12,6 +12,7 @@ const Scheme = () => {
     const [type, setType] = useState('');
     const [date, setDate] = useState('');
     const [eligibility, setEligibility] = useState('');
+    const [deleteScheme, setDeleteScheme] = useState('');
 
     const dispatch = useDispatch();
 
@@ -20,6 +21,7 @@ const Scheme = () => {
     const schemeTypeList = useSelector((state) => state.scheme.schemeTypeList);
     const schemeDateList = useSelector((state) => state.scheme.schemeDateList);
     const schemeEligibilityList = useSelector((state) => state.scheme.schemeEligibilityList);
+    const schemeDelete = useSelector((state) => state.scheme.schemeDelete);
 
 
     const handleScheme = (e) => {
@@ -40,6 +42,11 @@ const Scheme = () => {
     const handleSchemeEligibility = (e) => {
         console.log('handleSchemeEligibility');
         setEligibility(e.target.value);
+    }
+
+    const handleDeleteScheme = (e) => {
+        console.log('handleDeleteScheme');
+        setDeleteScheme(e.target.value);
     }
 
     // const handleScheme = (e) => {
@@ -140,6 +147,23 @@ const Scheme = () => {
             })
             .catch(() => {
                 alert(`Scheme with eligibility ${eligibility} not found.`);
+            });
+
+    }
+
+    // --------------------------------------------------------------------------------
+
+    const submitDeleteSchemey = (evt) => {
+        evt.preventDefault();
+        console.log('submitDeleteSchemey');
+        deleteSchemeService(deleteScheme)
+            .then((response) => {
+                alert(`Scheme deleted successfully.`)
+                dispatch(deleteSchemeByID(response.data));             // Sending data to redux store
+
+            })
+            .catch(() => {
+                alert(`Scheme with Id ${deleteScheme} not found.`);
             });
 
     }
@@ -385,6 +409,47 @@ const Scheme = () => {
             </div>
 
 
+
+            <hr />
+            {/* ---------------------------------------------------------------------------------- */}
+
+
+
+            <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
+                <h3>Delete scheme by Id</h3>
+                <form className="form form-group form-primary" onSubmit={submitDeleteSchemey}>
+                    <input className="form-control mt-3" type="number" id="deleteScheme" name="deleteScheme" value={deleteScheme} onChange={handleDeleteScheme} placeholder="Enter Scheme Id" autoFocus required />
+                    <input className="form-control mt-3 btn btn-primary" type="submit" value="Delete Scheme" />
+                </form>
+
+                <table className="table table-light table-striped ">
+                    <thead>
+                        <tr>
+                            <th>Scheme Id</th>
+                            <th>Name</th>
+                            <th>Objective</th>
+                            <th>Eligibility</th>
+                            <th>Launch Date</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{schemeDelete.schemeId}</td>
+                            <td>{schemeDelete.schemeName}</td>
+                            <td>{schemeDelete.schemeObjective}</td>
+                            <td>{schemeDelete.schemeEligibility}</td>
+                            <td>{schemeDelete.schemeLaunchDate}</td>
+                            <td>{schemeDelete.schemeType}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <hr />
+            {/* ---------------------------------------------------------------------------------- */}
 
         </div>
     );
