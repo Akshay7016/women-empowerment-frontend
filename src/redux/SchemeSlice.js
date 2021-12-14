@@ -8,6 +8,8 @@ const SchemeSlice = createSlice({
 
         schemeState: new SchemeModel(),
         schemeList : [],
+        schemeTypeList : [], 
+        schemeDateList : [],
     },
 
     reducers: {
@@ -23,12 +25,19 @@ const SchemeSlice = createSlice({
 
         getSchemeByType: (state, action) => {
             console.log("SchemeSlice reducers getSchemeByType");
-            state.schemeList = action.payload;
+            state.schemeTypeList = action.payload;
+        },
+
+        getSchemeByLaunchDate: (state, action) => {
+            console.log("SchemeSlice reducers getSchemeByLaunchDate");
+            state.schemeDateList = action.payload;
         }
+
+
     }
 }
 
 );
 
-export const {getSchemeById, getAllSchemes, getSchemeByType} = SchemeSlice.actions;
+export const {getSchemeById, getAllSchemes, getSchemeByType, getSchemeByLaunchDate} = SchemeSlice.actions;
 export default SchemeSlice.reducer;
