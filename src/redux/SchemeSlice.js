@@ -7,17 +7,28 @@ const SchemeSlice = createSlice({
     initialState: {
 
         schemeState: new SchemeModel(),
+        schemeList : [],
     },
 
     reducers: {
         getSchemeById: (state, action) => {
             console.log("SchemeSlice reducers getSchemeById");
             state.schemeState = action.payload;
+        },
+
+        getAllSchemes : (state, action) => {
+            console.log("SchemeSlice reducers getAllSchemes");
+            state.schemeList = action.payload;
+        },
+
+        getSchemeByType: (state, action) => {
+            console.log("SchemeSlice reducers getSchemeByType");
+            state.schemeList = action.payload;
         }
     }
 }
 
 );
 
-export const {getSchemeById} = SchemeSlice.actions;
+export const {getSchemeById, getAllSchemes, getSchemeByType} = SchemeSlice.actions;
 export default SchemeSlice.reducer;
