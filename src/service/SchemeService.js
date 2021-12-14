@@ -20,4 +20,9 @@ const getSchemeByDateService = (date) => {
     return axios.get(`/viewbylaunchdate/${date}`);
 }
 
-export { getSchemeByIdService, getAllSchemeService, getSchemeByTypeService, getSchemeByDateService};
+const getSchemeByEligibilityService = (eligibility) => {
+    console.log('getSchemeByEligibilityService');
+    return axios.get(`/viewbyeligibility/${eligibility}`);
+}
+
+export { getSchemeByIdService, getAllSchemeService, getSchemeByTypeService, getSchemeByDateService, getSchemeByEligibilityService};
