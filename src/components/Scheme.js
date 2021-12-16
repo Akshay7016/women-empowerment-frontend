@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { getSchemeByIdService, getAllSchemeService, getSchemeByTypeService, getSchemeByDateService, getSchemeByEligibilityService, deleteSchemeService, addSchemeService } from "../service/SchemeService";
 import SchemeModel from "../model/SchemeModel";
-import TrainingCourseModel from "../model/TrainingCourseModel";
 
 
 
@@ -28,11 +27,11 @@ const Scheme = () => {
     const schemeDateList = useSelector((state) => state.scheme.schemeDateList);
     const schemeEligibilityList = useSelector((state) => state.scheme.schemeEligibilityList);
     const schemeDelete = useSelector((state) => state.scheme.schemeDelete);
-    const schemeAdd = useSelector((state) => state.scheme.schemeAdd);
+    // const schemeAdd = useSelector((state) => state.scheme.schemeAdd);
 
 
     const handleSchemeData = (e) => {
-        console.log(e);
+        console.log("handleSchemeData");
         setSchemeData({
             ...schemeData,
             [e.target.name]: e.target.value
@@ -188,7 +187,7 @@ const Scheme = () => {
 
             })
             .catch(() => {
-                alert(`Scheme with Id ${schemeData.schemeId} already present.`);
+                alert(`Scheme already present.`);
             });
 
     }
@@ -197,18 +196,19 @@ const Scheme = () => {
 
 
     return (
-        <div className="container">
-            <h1 className="display-4 text-primary mt-3 mb-3" >Scheme Component</h1>
+        <div className="container ">     
+            <h1 className="display-4 text-danger mt-3 mb-3 font-weight-bold text-center" >Scheme Component</h1>
 
-            <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
+
+            <div className="col-12 border border-light shadow p-3 mb-5 bg-white ">
                 <h3>Find scheme by Id</h3>
                 <form className="form form-group form-primary" onSubmit={submitGetSchemeById}>
                     <input className="form-control mt-3" type="number" id="schemeId" name="schemeId" value={schemeData.schemeId} onChange={handleSchemeData} placeholder="Enter Scheme Id" required />
                     <input className="form-control mt-3 btn btn-primary" type="submit" value="Find Scheme" />
                 </form>
 
-                <table className="table table-light table-striped ">
-                    <thead>
+                <table className="table table-light table-striped">
+                    <thead class="table-warning">
                         <tr>
                             <th>Scheme Id</th>
                             <th>Name</th>
@@ -498,53 +498,53 @@ const Scheme = () => {
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Scheme Id</label>
                         <div class="col-sm-10">
-                        <input type="number" class="form-control" id="schemeId" name="schemeId" value={schemeData.schemeId} onChange={handleSchemeData} />
+                            <input type="number" class="form-control" id="schemeId" name="schemeId" value={schemeData.schemeId} onChange={handleSchemeData} />
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Scheme Name</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="schemeName" name="schemeName" value={schemeData.schemeName} onChange={handleSchemeData} />
+                            <input type="text" class="form-control" id="schemeName" name="schemeName" value={schemeData.schemeName} onChange={handleSchemeData} />
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Scheme Objective</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="schemeObjective" name="schemeObjective" value={schemeData.schemeObjective} onChange={handleSchemeData} />
+                            <input type="text" class="form-control" id="schemeObjective" name="schemeObjective" value={schemeData.schemeObjective} onChange={handleSchemeData} />
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Scheme Eligibility</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="schemeEligibility" name="schemeEligibility" value={schemeData.schemeEligibility} onChange={handleSchemeData} />
+                            <input type="text" class="form-control" id="schemeEligibility" name="schemeEligibility" value={schemeData.schemeEligibility} onChange={handleSchemeData} />
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Launch Date</label>
                         <div class="col-sm-10">
-                        <input type="date" class="form-control" id="schemeLaunchDate" name="schemeLaunchDate" value={schemeData.schemeLaunchDate} onChange={handleSchemeData} />
+                            <input type="date" class="form-control" id="schemeLaunchDate" name="schemeLaunchDate" value={schemeData.schemeLaunchDate} onChange={handleSchemeData} />
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Type</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="schemeType" name="schemeType" value={schemeData.schemeType} onChange={handleSchemeData} />
+                            <input type="text" class="form-control" id="schemeType" name="schemeType" value={schemeData.schemeType} onChange={handleSchemeData} />
                         </div>
                     </div>
 
                     {/* <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Course Id</label>
                         <div class="col-sm-10">
-                        <input type="number" class="form-control" id="schemeType" name="schemeType" value={schemeData.} onChange={handleSchemeData} />
+                        <input type="text" class="form-control" id="courseId" name="courseId" value={schemeData.trainingCourse.courseId} onChange={handleSchemeData} />
                         </div>
                     </div> */}
 
-                    
+
 
                     <input className="form-control mt-3 btn btn-success" type="submit" value="Add Scheme" />
                 </form>
