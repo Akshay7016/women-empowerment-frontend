@@ -31,6 +31,11 @@ const deleteSchemeService = (deleteScheme) => {
     return axios.delete(`/deleteschemebyid/${deleteScheme}`);
 }
 
+const addSchemeService = (add) => {
+    console.log('addSchemeService');
+    return axios.post(`/addscheme`,add);
+}
 
 
-export { getSchemeByIdService, getAllSchemeService, getSchemeByTypeService, getSchemeByDateService, getSchemeByEligibilityService, deleteSchemeService};
+
+export { getSchemeByIdService, getAllSchemeService, getSchemeByTypeService, getSchemeByDateService, getSchemeByEligibilityService, deleteSchemeService, addSchemeService};

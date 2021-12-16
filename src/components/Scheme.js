@@ -1,27 +1,31 @@
-import { getSchemeById, getAllSchemes, getSchemeByType, getSchemeByLaunchDate, getSchemeByEligibility, deleteSchemeByID } from "../redux/SchemeSlice";
+import { getSchemeById, getAllSchemes, getSchemeByType, getSchemeByLaunchDate, getSchemeByEligibility, deleteSchemeByID, addScheme } from "../redux/SchemeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { getSchemeByIdService, getAllSchemeService, getSchemeByTypeService, getSchemeByDateService, getSchemeByEligibilityService, deleteSchemeService } from "../service/SchemeService";
-// import SchemeModel from "../model/SchemeModel";
+import { getSchemeByIdService, getAllSchemeService, getSchemeByTypeService, getSchemeByDateService, getSchemeByEligibilityService, deleteSchemeService, addSchemeService } from "../service/SchemeService";
+import SchemeModel from "../model/SchemeModel";
 
 
 
 const Scheme = () => {
+
+    const [training, setTraining] = useState({});
 
     const [sid, setSid] = useState('');
     const [type, setType] = useState('');
     const [date, setDate] = useState('');
     const [eligibility, setEligibility] = useState('');
     const [deleteScheme, setDeleteScheme] = useState('');
+    const [add, setAdd] = useState(new SchemeModel());
 
     const dispatch = useDispatch();
 
     const schemeData = useSelector((state) => state.scheme.schemeState);
     const schemeList = useSelector((state) => state.scheme.schemeList);
-    const schemeTypeList = useSelector((state) => state.scheme.schemeTypeList);
-    const schemeDateList = useSelector((state) => state.scheme.schemeDateList);
-    const schemeEligibilityList = useSelector((state) => state.scheme.schemeEligibilityList);
-    const schemeDelete = useSelector((state) => state.scheme.schemeDelete);
+    const schemeTypeList = useSelector((state) => state.scheme.schemeList);
+    const schemeDateList = useSelector((state) => state.scheme.schemeList);
+    const schemeEligibilityList = useSelector((state) => state.scheme.schemeList);
+    const schemeDelete = useSelector((state) => state.scheme.schemeState);
+    const schemeAdd = useSelector((state) => state.scheme.schemeState);
 
 
     const handleScheme = (e) => {
@@ -49,13 +53,13 @@ const Scheme = () => {
         setDeleteScheme(e.target.value);
     }
 
-    // const handleScheme = (e) => {
-    //     console.log('handleScheme');
-    //     setSid({
-    //         ...sid,
-    //         [e.target.name]: e.target.value
-    //     });
-    // }
+    const handleAddScheme = (e) => {
+        console.log('handleAddScheme');
+        setAdd({
+            ...add,
+            [e.target.name]: e.target.value
+        });
+    }
 
     // const handleSchemeType = (e) => {
     //     console.log('handleSchemeType');
@@ -73,6 +77,7 @@ const Scheme = () => {
         getSchemeByIdService(sid)
             .then((response) => {
                 console.log(response.data);
+                setTraining(response.data.trainingCourse);
                 dispatch(getSchemeById(response.data));             // Sending data to redux store
 
             })
@@ -153,7 +158,7 @@ const Scheme = () => {
 
     // --------------------------------------------------------------------------------
 
-    const submitDeleteSchemey = (evt) => {
+    const submitDeleteScheme = (evt) => {
         evt.preventDefault();
         console.log('submitDeleteSchemey');
         deleteSchemeService(deleteScheme)
@@ -170,15 +175,34 @@ const Scheme = () => {
 
     // --------------------------------------------------------------------------------
 
+    const submitAddScheme = (evt) => {
+        evt.preventDefault();
+        console.log('submitAddScheme');
+        console.log(add);
+        addSchemeService(add)
+            .then((response) => {
+                alert(`Scheme Added successfully.`)
+                dispatch(addScheme(response.data));             // Sending data to redux store
+
+            })
+            .catch(() => {
+                alert(`Scheme with Id ${add.schemeId} already present.`);
+            });
+
+    }
+
+    // --------------------------------------------------------------------------------
+
 
     return (
         <div className="container">
             <h1 className="display-4 text-primary mt-3 mb-3" >Scheme Component</h1>
 
+
             <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
                 <h3>Find scheme by Id</h3>
                 <form className="form form-group form-primary" onSubmit={submitGetSchemeById}>
-                    <input className="form-control mt-3" type="number" id="sid" name="sid" value={sid} onChange={handleScheme} placeholder="Enter Scheme Id" autoFocus required />
+                    <input className="form-control mt-3" type="number" id="sid" name="sid" value={sid} onChange={handleScheme} placeholder="Enter Scheme Id" required />
                     <input className="form-control mt-3 btn btn-primary" type="submit" value="Find Scheme" />
                 </form>
 
@@ -191,6 +215,8 @@ const Scheme = () => {
                             <th>Eligibility</th>
                             <th>Launch Date</th>
                             <th>Type</th>
+                            <th>Course Name</th>
+                            <th>Course Duration</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -201,8 +227,11 @@ const Scheme = () => {
                             <td>{schemeData.schemeEligibility}</td>
                             <td>{schemeData.schemeLaunchDate}</td>
                             <td>{schemeData.schemeType}</td>
+                            <td>{training.courseName}</td>
+                            <td>{training.courseDurationn}</td>
 
                         </tr>
+
                     </tbody>
                 </table>
 
@@ -229,6 +258,8 @@ const Scheme = () => {
                                 <th>Eligibility</th>
                                 <th>Launch Date</th>
                                 <th>Type</th>
+                                <th>Course Name</th>
+                                <th>Course Duration</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -240,6 +271,8 @@ const Scheme = () => {
                                         <td>{scheme.schemeEligibility}</td>
                                         <td>{scheme.schemeLaunchDate}</td>
                                         <td>{scheme.schemeType}</td>
+                                        <td>{scheme.trainingCourse.courseName}</td>
+                                        <td>{scheme.trainingCourse.courseDurationn}</td>
                                     </tr>
                                 )
                             })}
@@ -256,14 +289,6 @@ const Scheme = () => {
             <div>
                 <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
                     <h3>Find Schemes By Type</h3>
-                    {/* <div class="form-group">
-                        <select class="form-control mb-3" name="schemeType" id="schemeType" value={type.schemeType} onChange={handleSchemeType}>
-                            <option value="Type">Select a Type</option>
-                            <option value="Free">Free</option>
-                            <option value="Paid">Paid</option>
-                        </select>
-                    </div> */}
-
 
                     <form className="form form-group form-primary" onSubmit={submitGetSchemeByType}>
                         <div class="form-group">
@@ -285,6 +310,8 @@ const Scheme = () => {
                                 <th>Eligibility</th>
                                 <th>Launch Date</th>
                                 <th>Type</th>
+                                <th>Course Name</th>
+                                <th>Course Duration</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -296,6 +323,8 @@ const Scheme = () => {
                                         <td>{scheme.schemeEligibility}</td>
                                         <td>{scheme.schemeLaunchDate}</td>
                                         <td>{scheme.schemeType}</td>
+                                        <td>{scheme.trainingCourse.courseName}</td>
+                                        <td>{scheme.trainingCourse.courseDurationn}</td>
                                     </tr>
                                 )
                             })}
@@ -313,7 +342,7 @@ const Scheme = () => {
                 <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
                     <h3>Find scheme by Launch Date</h3>
                     <form className="form form-group form-primary" onSubmit={submitGetSchemeByDate}>
-                        <input className="form-control mt-3" type="date" id="date" name="date" value={date} onChange={handleSchemeDate} autoFocus required />
+                        <input className="form-control mt-3" type="date" id="date" name="date" value={date} onChange={handleSchemeDate} required />
                         <input className="form-control mt-3 btn btn-primary" type="submit" value="Find Scheme" />
                     </form>
 
@@ -326,6 +355,8 @@ const Scheme = () => {
                                 <th>Eligibility</th>
                                 <th>Launch Date</th>
                                 <th>Type</th>
+                                <th>Course Name</th>
+                                <th>Course Duration</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -337,6 +368,8 @@ const Scheme = () => {
                                         <td>{scheme.schemeEligibility}</td>
                                         <td>{scheme.schemeLaunchDate}</td>
                                         <td>{scheme.schemeType}</td>
+                                        <td>{scheme.trainingCourse.courseName}</td>
+                                        <td>{scheme.trainingCourse.courseDurationn}</td>
                                     </tr>
                                 )
                             })}
@@ -389,6 +422,8 @@ const Scheme = () => {
                                 <th>Eligibility</th>
                                 <th>Launch Date</th>
                                 <th>Type</th>
+                                <th>Course Name</th>
+                                <th>Course Duration</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -400,6 +435,8 @@ const Scheme = () => {
                                         <td>{scheme.schemeEligibility}</td>
                                         <td>{scheme.schemeLaunchDate}</td>
                                         <td>{scheme.schemeType}</td>
+                                        <td>{scheme.trainingCourse.courseName}</td>
+                                        <td>{scheme.trainingCourse.courseDurationn}</td>
                                     </tr>
                                 )
                             })}
@@ -417,9 +454,9 @@ const Scheme = () => {
 
             <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
                 <h3>Delete scheme by Id</h3>
-                <form className="form form-group form-primary" onSubmit={submitDeleteSchemey}>
-                    <input className="form-control mt-3" type="number" id="deleteScheme" name="deleteScheme" value={deleteScheme} onChange={handleDeleteScheme} placeholder="Enter Scheme Id" autoFocus required />
-                    <input className="form-control mt-3 btn btn-primary" type="submit" value="Delete Scheme" />
+                <form className="form form-group form-primary" onSubmit={submitDeleteScheme}>
+                    <input className="form-control mt-3" type="number" id="deleteScheme" name="deleteScheme" value={deleteScheme} onChange={handleDeleteScheme} placeholder="Enter Scheme Id" required />
+                    <input className="form-control mt-3 btn btn-danger" type="submit" value="Delete Scheme" />
                 </form>
 
                 <table className="table table-light table-striped ">
@@ -442,6 +479,7 @@ const Scheme = () => {
                             <td>{schemeDelete.schemeLaunchDate}</td>
                             <td>{schemeDelete.schemeType}</td>
 
+
                         </tr>
                     </tbody>
                 </table>
@@ -450,6 +488,66 @@ const Scheme = () => {
 
             <hr />
             {/* ---------------------------------------------------------------------------------- */}
+
+            <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
+                <h3>Add Scheme</h3>
+
+                <form className="form form-group form-primary" onSubmit={submitAddScheme}>
+
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Scheme Id</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="schemeId" name="schemeId" value={add.schemeId} onChange={handleAddScheme} disabled/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Scheme Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="schemeName" name="schemeName" value={add.schemeName} onChange={handleAddScheme} />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Objective</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="schemeObjective" name="schemeObjective" value={add.schemeObjective} onChange={handleAddScheme} />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Eligibility</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="schemeEligibility" name="schemeEligibility" value={add.schemeEligibility} onChange={handleAddScheme} />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Launch Date</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="schemeLaunchDate" name="schemeLaunchDate" value={add.schemeLaunchDate} onChange={handleAddScheme} />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Type</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="schemeType" name="schemeType" value={add.schemeType} onChange={handleAddScheme} />
+                        </div>
+                    </div>
+
+                    {/* <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Course Id</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="courseName" name="courseName" value={add.trainingCourse} onChange={handleAddScheme} />
+                        </div>
+                    </div> */}
+
+                    <input className="form-control mt-3 btn btn-success" type="submit" value="Add Scheme" />
+                </form>
+
+            </div>
+
 
         </div>
     );
