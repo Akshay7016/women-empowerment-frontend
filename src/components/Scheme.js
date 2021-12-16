@@ -6,6 +6,7 @@ import SchemeModel from "../model/SchemeModel";
 
 
 
+
 const Scheme = () => {
 
     const [training, setTraining] = useState({});
@@ -21,11 +22,11 @@ const Scheme = () => {
 
     const schemeData = useSelector((state) => state.scheme.schemeState);
     const schemeList = useSelector((state) => state.scheme.schemeList);
-    const schemeTypeList = useSelector((state) => state.scheme.schemeList);
-    const schemeDateList = useSelector((state) => state.scheme.schemeList);
-    const schemeEligibilityList = useSelector((state) => state.scheme.schemeList);
-    const schemeDelete = useSelector((state) => state.scheme.schemeState);
-    const schemeAdd = useSelector((state) => state.scheme.schemeState);
+    const schemeTypeList = useSelector((state) => state.scheme.schemeTypeList);
+    const schemeDateList = useSelector((state) => state.scheme.schemeDateList);
+    const schemeEligibilityList = useSelector((state) => state.scheme.schemeEligibilityList);
+    const schemeDelete = useSelector((state) => state.scheme.schemeDelete);
+    const schemeAdd = useSelector((state) => state.scheme.schemeAdd);
 
 
     const handleScheme = (e) => {
@@ -197,7 +198,6 @@ const Scheme = () => {
     return (
         <div className="container">
             <h1 className="display-4 text-primary mt-3 mb-3" >Scheme Component</h1>
-
 
             <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
                 <h3>Find scheme by Id</h3>
@@ -497,7 +497,7 @@ const Scheme = () => {
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Scheme Id</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="schemeId" name="schemeId" value={add.schemeId} onChange={handleAddScheme} disabled/>
+                            <input type="number" class="form-control" id="schemeId" name="schemeId" value={add.schemeId} onChange={handleAddScheme} />
                         </div>
                     </div>
 
@@ -539,7 +539,7 @@ const Scheme = () => {
                     {/* <div class="form-group row">
                         <label for="inputPassword3" class="col-sm-2 col-form-label">Course Id</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="courseName" name="courseName" value={add.trainingCourse} onChange={handleAddScheme} />
+                            <input type="number" class="form-control" id="courseId" name="courseId" value={course.courseId} onChange={handleCourse} />
                         </div>
                     </div> */}
 
