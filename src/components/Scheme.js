@@ -196,8 +196,9 @@ const Scheme = () => {
 
 
     return (
-        <div className="container ">     
+        <div className="container ">
             <h1 className="display-4 text-danger mt-3 mb-3 font-weight-bold text-center" >Scheme Component</h1>
+
 
 
             <div className="col-12 border border-light shadow p-3 mb-5 bg-white ">
@@ -242,143 +243,96 @@ const Scheme = () => {
             <hr />
             {/* ---------------------------------------------------------------------------------- */}
 
-            <div>
-                <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
-                    <h3>Find all Schemes</h3>
-                    <div>
-                        <form className="form form-group form-primary">
-                            <input className="mt-3 btn btn-primary btn-block" type="button" onClick={submitGetAllSchemes} value="Find All Schemes" />
-                        </form>
+
+            <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
+                <h3>Find all Schemes</h3>
+                <div>
+                    <form className="form form-group form-primary">
+                        <input className="mt-3 btn btn-primary btn-block" type="button" onClick={submitGetAllSchemes} value="Find All Schemes" />
+                    </form>
+                </div>
+                <table className="table table-light table-striped ">
+                    <thead>
+                        <tr>
+                            <th>Scheme Id</th>
+                            <th>Name</th>
+                            <th>Objective</th>
+                            <th>Eligibility</th>
+                            <th>Launch Date</th>
+                            <th>Type</th>
+                            <th>Course Name</th>
+                            <th>Course Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {schemeList.map((scheme, key) => {
+                            return (
+                                <tr key={key}>  <td>{scheme.schemeId}</td>
+                                    <td>{scheme.schemeName}</td>
+                                    <td>{scheme.schemeObjective}</td>
+                                    <td>{scheme.schemeEligibility}</td>
+                                    <td>{scheme.schemeLaunchDate}</td>
+                                    <td>{scheme.schemeType}</td>
+                                    <td>{scheme.trainingCourse.courseName}</td>
+                                    <td>{scheme.trainingCourse.courseDurationn}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            <hr />
+            {/* ---------------------------------------------------------------------------------- */}
+
+
+            <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
+                <h3>Find Schemes By Type</h3>
+
+                <form className="form form-group form-primary" onSubmit={submitGetSchemeByType}>
+                    <div class="form-group">
+                        <select class="form-control mb-3" name="schemeType" id="schemeType" value={schemeData.schemeType} onChange={handleSchemeData}>
+                            <option value="Type">Select a Type</option>
+                            <option value="Free">Free</option>
+                            <option value="Paid">Paid</option>
+                        </select>
                     </div>
-                    <table className="table table-light table-striped ">
-                        <thead>
-                            <tr>
-                                <th>Scheme Id</th>
-                                <th>Name</th>
-                                <th>Objective</th>
-                                <th>Eligibility</th>
-                                <th>Launch Date</th>
-                                <th>Type</th>
-                                <th>Course Name</th>
-                                <th>Course Duration</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {schemeList.map((scheme, key) => {
-                                return (
-                                    <tr key={key}>  <td>{scheme.schemeId}</td>
-                                        <td>{scheme.schemeName}</td>
-                                        <td>{scheme.schemeObjective}</td>
-                                        <td>{scheme.schemeEligibility}</td>
-                                        <td>{scheme.schemeLaunchDate}</td>
-                                        <td>{scheme.schemeType}</td>
-                                        <td>{scheme.trainingCourse.courseName}</td>
-                                        <td>{scheme.trainingCourse.courseDurationn}</td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </table>
-                </div>
+                    <input className="form-control mt-3 btn btn-primary" type="submit" value="Find Scheme" />
+                </form>
+
+                <table className="table table-light table-striped ">
+                    <thead>
+                        <tr>
+                            <th>Scheme Id</th>
+                            <th>Name</th>
+                            <th>Objective</th>
+                            <th>Eligibility</th>
+                            <th>Launch Date</th>
+                            <th>Type</th>
+                            <th>Course Name</th>
+                            <th>Course Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {schemeTypeList.map((scheme, key) => {
+                            return (
+                                <tr key={key}>  <td>{scheme.schemeId}</td>
+                                    <td>{scheme.schemeName}</td>
+                                    <td>{scheme.schemeObjective}</td>
+                                    <td>{scheme.schemeEligibility}</td>
+                                    <td>{scheme.schemeLaunchDate}</td>
+                                    <td>{scheme.schemeType}</td>
+                                    <td>{scheme.trainingCourse.courseName}</td>
+                                    <td>{scheme.trainingCourse.courseDurationn}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
             </div>
 
-
-            <hr />
-            {/* ---------------------------------------------------------------------------------- */}
-
-
-            <div>
-                <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
-                    <h3>Find Schemes By Type</h3>
-
-                    <form className="form form-group form-primary" onSubmit={submitGetSchemeByType}>
-                        <div class="form-group">
-                            <select class="form-control mb-3" name="schemeType" id="schemeType" value={schemeData.schemeType} onChange={handleSchemeData}>
-                                <option value="Type">Select a Type</option>
-                                <option value="Free">Free</option>
-                                <option value="Paid">Paid</option>
-                            </select>
-                        </div>
-                        <input className="form-control mt-3 btn btn-primary" type="submit" value="Find Scheme" />
-                    </form>
-
-                    <table className="table table-light table-striped ">
-                        <thead>
-                            <tr>
-                                <th>Scheme Id</th>
-                                <th>Name</th>
-                                <th>Objective</th>
-                                <th>Eligibility</th>
-                                <th>Launch Date</th>
-                                <th>Type</th>
-                                <th>Course Name</th>
-                                <th>Course Duration</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {schemeTypeList.map((scheme, key) => {
-                                return (
-                                    <tr key={key}>  <td>{scheme.schemeId}</td>
-                                        <td>{scheme.schemeName}</td>
-                                        <td>{scheme.schemeObjective}</td>
-                                        <td>{scheme.schemeEligibility}</td>
-                                        <td>{scheme.schemeLaunchDate}</td>
-                                        <td>{scheme.schemeType}</td>
-                                        <td>{scheme.trainingCourse.courseName}</td>
-                                        <td>{scheme.trainingCourse.courseDurationn}</td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-
-            <hr />
-            {/* ---------------------------------------------------------------------------------- */}
-
-
-            <div>
-                <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
-                    <h3>Find scheme by Launch Date</h3>
-                    <form className="form form-group form-primary" onSubmit={submitGetSchemeByDate}>
-                        <input className="form-control mt-3" type="date" id="schemeLaunchDate" name="schemeLaunchDate" value={schemeData.schemeLaunchDate} onChange={handleSchemeData} required />
-                        <input className="form-control mt-3 btn btn-primary" type="submit" value="Find Scheme" />
-                    </form>
-
-                    <table className="table table-light table-striped ">
-                        <thead>
-                            <tr>
-                                <th>Scheme Id</th>
-                                <th>Name</th>
-                                <th>Objective</th>
-                                <th>Eligibility</th>
-                                <th>Launch Date</th>
-                                <th>Type</th>
-                                <th>Course Name</th>
-                                <th>Course Duration</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {schemeDateList.map((scheme, key) => {
-                                return (
-                                    <tr key={key}>  <td>{scheme.schemeId}</td>
-                                        <td>{scheme.schemeName}</td>
-                                        <td>{scheme.schemeObjective}</td>
-                                        <td>{scheme.schemeEligibility}</td>
-                                        <td>{scheme.schemeLaunchDate}</td>
-                                        <td>{scheme.schemeType}</td>
-                                        <td>{scheme.trainingCourse.courseName}</td>
-                                        <td>{scheme.trainingCourse.courseDurationn}</td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
 
 
             <hr />
@@ -386,10 +340,56 @@ const Scheme = () => {
 
 
 
-            <div>
-                <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
-                    <h3>Find Schemes By Eligibility</h3>
-                    {/* <div class="form-group">
+            <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
+                <h3>Find scheme by Launch Date</h3>
+                <form className="form form-group form-primary" onSubmit={submitGetSchemeByDate}>
+                    <input className="form-control mt-3" type="date" id="schemeLaunchDate" name="schemeLaunchDate" value={schemeData.schemeLaunchDate} onChange={handleSchemeData} required />
+                    <input className="form-control mt-3 btn btn-primary" type="submit" value="Find Scheme" />
+                </form>
+
+                <table className="table table-light table-striped ">
+                    <thead>
+                        <tr>
+                            <th>Scheme Id</th>
+                            <th>Name</th>
+                            <th>Objective</th>
+                            <th>Eligibility</th>
+                            <th>Launch Date</th>
+                            <th>Type</th>
+                            <th>Course Name</th>
+                            <th>Course Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {schemeDateList.map((scheme, key) => {
+                            return (
+                                <tr key={key}>  <td>{scheme.schemeId}</td>
+                                    <td>{scheme.schemeName}</td>
+                                    <td>{scheme.schemeObjective}</td>
+                                    <td>{scheme.schemeEligibility}</td>
+                                    <td>{scheme.schemeLaunchDate}</td>
+                                    <td>{scheme.schemeType}</td>
+                                    <td>{scheme.trainingCourse.courseName}</td>
+                                    <td>{scheme.trainingCourse.courseDurationn}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+
+            </div>
+
+
+
+            <hr />
+            {/* ---------------------------------------------------------------------------------- */}
+
+
+
+
+            <div className="col-12 border border-light shadow p-3 mb-5 bg-white">
+                <h3>Find Schemes By Eligibility</h3>
+                {/* <div class="form-group">
                         <select class="form-control mb-3" name="schemeType" id="schemeType" value={type.schemeType} onChange={handleSchemeType}>
                             <option value="Type">Select a Type</option>
                             <option value="Free">Free</option>
@@ -398,53 +398,53 @@ const Scheme = () => {
                     </div> */}
 
 
-                    <form className="form form-group form-primary" onSubmit={submitGetSchemeByEligibility}>
-                        <div class="form-group">
-                            <select class="form-control mb-3" name="schemeEligibility" id="schemeEligibility" value={schemeData.schemeEligibility} onChange={handleSchemeData}>
-                                <option value="eligibility">Select Eligibility</option>
-                                <option value="BE">BE</option>
-                                <option value="ME">ME</option>
-                                <option value="BA">BA</option>
-                                <option value="BCOM">BCOM</option>
-                                <option value="10th Pass">10th Pass</option>
-                                <option value="12th Pass">12th Pass</option>
-                                <option value="Any Qualification">Any Qualification</option>
-                            </select>
-                        </div>
-                        <input className="form-control mt-3 btn btn-primary" type="submit" value="Find Scheme" />
-                    </form>
+                <form className="form form-group form-primary" onSubmit={submitGetSchemeByEligibility}>
+                    <div class="form-group">
+                        <select class="form-control mb-3" name="schemeEligibility" id="schemeEligibility" value={schemeData.schemeEligibility} onChange={handleSchemeData}>
+                            <option value="eligibility">Select Eligibility</option>
+                            <option value="BE">BE</option>
+                            <option value="ME">ME</option>
+                            <option value="BA">BA</option>
+                            <option value="BCOM">BCOM</option>
+                            <option value="10th Pass">10th Pass</option>
+                            <option value="12th Pass">12th Pass</option>
+                            <option value="Any Qualification">Any Qualification</option>
+                        </select>
+                    </div>
+                    <input className="form-control mt-3 btn btn-primary" type="submit" value="Find Scheme" />
+                </form>
 
-                    <table className="table table-light table-striped ">
-                        <thead>
-                            <tr>
-                                <th>Scheme Id</th>
-                                <th>Name</th>
-                                <th>Objective</th>
-                                <th>Eligibility</th>
-                                <th>Launch Date</th>
-                                <th>Type</th>
-                                <th>Course Name</th>
-                                <th>Course Duration</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {schemeEligibilityList.map((scheme, key) => {
-                                return (
-                                    <tr key={key}>  <td>{scheme.schemeId}</td>
-                                        <td>{scheme.schemeName}</td>
-                                        <td>{scheme.schemeObjective}</td>
-                                        <td>{scheme.schemeEligibility}</td>
-                                        <td>{scheme.schemeLaunchDate}</td>
-                                        <td>{scheme.schemeType}</td>
-                                        <td>{scheme.trainingCourse.courseName}</td>
-                                        <td>{scheme.trainingCourse.courseDurationn}</td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </table>
-                </div>
+                <table className="table table-light table-striped ">
+                    <thead>
+                        <tr>
+                            <th>Scheme Id</th>
+                            <th>Name</th>
+                            <th>Objective</th>
+                            <th>Eligibility</th>
+                            <th>Launch Date</th>
+                            <th>Type</th>
+                            <th>Course Name</th>
+                            <th>Course Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {schemeEligibilityList.map((scheme, key) => {
+                            return (
+                                <tr key={key}>  <td>{scheme.schemeId}</td>
+                                    <td>{scheme.schemeName}</td>
+                                    <td>{scheme.schemeObjective}</td>
+                                    <td>{scheme.schemeEligibility}</td>
+                                    <td>{scheme.schemeLaunchDate}</td>
+                                    <td>{scheme.schemeType}</td>
+                                    <td>{scheme.trainingCourse.courseName}</td>
+                                    <td>{scheme.trainingCourse.courseDurationn}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
             </div>
+
 
 
 
