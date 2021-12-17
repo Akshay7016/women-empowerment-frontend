@@ -1,18 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import SchemeModel from '../model/SchemeModel'
+import Scheme from '../model/Scheme'
 
 const SchemeSlice = createSlice({
     name:'scheme',
 
     initialState: {
 
-        schemeState: new SchemeModel(),
+        schemeState: new Scheme(),
         schemeList : [],
         schemeTypeList : [],
         schemeDateList : [],
         schemeEligibilityList : [],
-        schemeDelete : new SchemeModel(),
-        schemeAdd : new SchemeModel()
+        schemeDelete : new Scheme(),
+        schemeAdd : new Scheme(),
     },
 
     reducers: {
@@ -49,7 +49,7 @@ const SchemeSlice = createSlice({
         addScheme : (state, action) => {
             console.log("SchemeSlice reducers addScheme");
             state.schemeAdd = action.payload;
-        }
+        },
 
 
     }

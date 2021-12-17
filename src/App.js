@@ -1,12 +1,12 @@
 
 import './App.css';
-import Scheme from './components/Scheme';
+import SchemeComponent from './components/SchemeComponent';
 
 
 const App = () => {
   return (
-    <div className="bg-light">
-      <Scheme />
+    <div className="bg-secondary">
+      <SchemeComponent />
     </div>
   );
 }

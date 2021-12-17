@@ -1,4 +1,4 @@
-class TrainingCourseModel{
+class TrainingCourse{
     courseId;
     courseName;
     courseDurationn;
@@ -7,4 +7,4 @@ class TrainingCourseModel{
     endingDate;
 }
 
-export default TrainingCourseModel;
+export default TrainingCourse;

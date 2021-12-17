@@ -36,6 +36,10 @@ const addSchemeService = (add) => {
     return axios.post(`/addscheme`,add);
 }
 
+const updateSchemeService = (update) => {
+    console.log('updateSchemeService');
+    return axios.put(`/updatescheme`,update);
+}
 
 
-export { getSchemeByIdService, getAllSchemeService, getSchemeByTypeService, getSchemeByDateService, getSchemeByEligibilityService, deleteSchemeService, addSchemeService};
+export { getSchemeByIdService, getAllSchemeService, getSchemeByTypeService, getSchemeByDateService, getSchemeByEligibilityService, deleteSchemeService, addSchemeService, updateSchemeService};

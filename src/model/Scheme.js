@@ -1,5 +1,5 @@
 
-class SchemeModel{
+class Scheme{
     schemeId;
     schemeName;
     schemeType;
@@ -9,4 +9,4 @@ class SchemeModel{
     trainingCourse;
 }
 
-export default SchemeModel;
+export default Scheme;
