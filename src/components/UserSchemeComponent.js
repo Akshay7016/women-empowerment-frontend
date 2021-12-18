@@ -116,6 +116,9 @@ const UserSchemeComponent = () => {
 
     return (
         <div className="container">
+            <br />
+            <h1 className="display-3 text-warning mt-3 mb-3 font-weight-bold text-center" >Scheme Component</h1>
+            <br /><br />
 
             <div id="accordion">
 

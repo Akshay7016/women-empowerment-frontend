@@ -1,10 +1,10 @@
-class TrainingCourse{
+class TrainingCourseModel{
     courseId;
     courseName;
     courseDurationn;
     courseStatus;
-    courseStatus;
+    startingDate;
     endingDate;
 }
 
-export default TrainingCourse;
+export default TrainingCourseModel;

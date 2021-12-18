@@ -1,23 +1,17 @@
-import { getSchemeById, getAllSchemes, getSchemeByType, getSchemeByLaunchDate, getSchemeByEligibility, deleteSchemeByID, addScheme } from "../redux/SchemeSlice";
+import {deleteSchemeByID, addScheme } from "../redux/SchemeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { getSchemeByIdService, getAllSchemeService, getSchemeByTypeService, getSchemeByDateService, getSchemeByEligibilityService, deleteSchemeService, addSchemeService } from "../service/SchemeService";
+import { deleteSchemeService, addSchemeService } from "../service/SchemeService";
 import Scheme from "../model/Scheme";
 import UserSchemeComponent from "./UserSchemeComponent";
 
 
 const SchemeComponent = () => {
 
-    const [training, setTraining] = useState({});
     const [schemeData, setSchemeData] = useState(new Scheme());
 
     const dispatch = useDispatch();
 
-    const schemeState = useSelector((state) => state.scheme.schemeState);
-    const schemeList = useSelector((state) => state.scheme.schemeList);
-    const schemeTypeList = useSelector((state) => state.scheme.schemeTypeList);
-    const schemeDateList = useSelector((state) => state.scheme.schemeDateList);
-    const schemeEligibilityList = useSelector((state) => state.scheme.schemeEligibilityList);
     const schemeDelete = useSelector((state) => state.scheme.schemeDelete);
 
 
@@ -73,10 +67,7 @@ const SchemeComponent = () => {
 
     return (
         <div>
-            <br />
-            <h1 className="display-3 text-warning mt-3 mb-3 font-weight-bold text-center" >Scheme Component</h1>
-            <br /><br />
-
+            
             <UserSchemeComponent />
             
             <div className="container">
