@@ -37,7 +37,7 @@ const Register = (props) => {
     return (
         <div className="container">
             <div className="col-4 mt-3" >
-                <h1 className="display-4 text-primary">Register</h1>
+                <h1 className="display-4 text-primary text-center">Register</h1>
                 <form className="form form-group form-dark " onSubmit={submitUser}>
                     <div>
                         <input

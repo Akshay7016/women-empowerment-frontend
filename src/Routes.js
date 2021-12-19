@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import Home from './components/Home';
 import Page404 from './components/Page404';
 import Logout from './components/Logout';
+import Footer from './components/Footer';
 import UserSchemeComponent from './components/UserSchemeComponent';
 import SchemeComponent from './components/SchemeComponent';
 import NgoComponent from './components/NgoComponent';
@@ -27,6 +28,7 @@ const Routes = () => {
                     <div>
                         <Switch>
                             <Route exact path="/"> <Home /> </Route>
+                            <Route path="/home"> <Home /> </Route>
                             <Route path="/login"> <Login /> </Route>
                             <Route path="/register"> <Register /> </Route>
                             <Route path="/logout"> <Logout /> </Route>
@@ -42,7 +44,7 @@ const Routes = () => {
                             <Route path="/feedbackcomponent"> <FeedbackComponent /> </Route>
                             <Route path="/userfeedbackcomponent"> <UserFeedbackComponent /> </Route>
                             
-                            <Route path="/page404"> <Page404 /> </Route>
+                            <Route path="/*"> <Page404 /> </Route>
                         </Switch>
                     </div>
                     {/* <Footer /> */}

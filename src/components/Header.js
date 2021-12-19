@@ -16,11 +16,13 @@ const Header = () => {
         return (
             <header class="header sticky-top">
                 <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark">
-                    <div class="container">
-                        <Link className="navbar-brand" to="/">
-                            <img src="https://www.capgemini.com/wp-content/themes/capgemini-komposite/assets/images/logo.svg"
-                                height="24px" alt="Capgemini" />
+                        <Link className="navbar-brand" to="/home">
+                            <div class="text-white">
+                                <h3>WomenEmpowerment</h3>
+                            </div>
                         </Link>
+                    <div class="container">
+                        
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -56,11 +58,15 @@ const Header = () => {
         return (
             <header class="header sticky-top">
                 <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark">
-                    <div class="container">
-                        <Link className="navbar-brand" to="/">
-                            <img src="https://www.capgemini.com/wp-content/themes/capgemini-komposite/assets/images/logo.svg"
-                                height="24px" alt="Capgemini" />
+
+                        <Link className="navbar-brand" to="/home">
+                            <div class="text-white">
+                                <h3>WomenEmpowerment</h3>
+                            </div>
                         </Link>
+                        
+                    <div class="container">
+                        
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -95,11 +101,15 @@ const Header = () => {
         return (
             <header class="header sticky-top">
                 <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark">
-                    <div class="container">
-                        <Link className="navbar-brand" to="/">
-                            <img src="https://www.capgemini.com/wp-content/themes/capgemini-komposite/assets/images/logo.svg"
-                                height="24px" alt="Capgemini" />
+
+                        <Link className="navbar-brand" to="/home">
+                            <div class="text-white">
+                                <h3>WomenEmpowerment</h3>
+                            </div>
                         </Link>
+
+                    <div class="container">
+                          
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                             <span class="navbar-toggler-icon"></span>
                         </button>
