@@ -72,7 +72,7 @@ const UserFeedbackComponent = () => {
         <div className="container text-center">
 
             <br />
-            <h1 className="display-3 text-primary mt-3 mb-3 text-center" ><b>FeedBack Component</b></h1><br />
+            <h1 className="display-3 text-primary mt-3 mb-3 text-center" ><b>Feedback Component</b></h1><br />
             <br />
 
             <div class="accordion" id="accordionExample">

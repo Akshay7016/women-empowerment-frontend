@@ -2,6 +2,7 @@ import schemeReducer from './SchemeSlice';
 import ngoReducer from './NgoSlice';
 import trainingcourseReducer from './TrainingCourseSlice';
 import feedbackReducer from './FeedbackSlice';
+import traineeReducer from './TraineeSlice';
 
 import { configureStore } from "@reduxjs/toolkit";
 
@@ -12,7 +13,8 @@ const store = configureStore(
             scheme : schemeReducer,
             ngo : ngoReducer,
             trainingcourse : trainingcourseReducer,
-            feedback : feedbackReducer,   
+            feedback : feedbackReducer,
+            trainee : traineeReducer,   
         }
     }
 );

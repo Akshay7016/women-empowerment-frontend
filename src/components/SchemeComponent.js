@@ -1,19 +1,18 @@
-import {deleteSchemeByID, addScheme } from "../redux/SchemeSlice";
+import { deleteSchemeByID, addScheme } from "../redux/SchemeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { deleteSchemeService, addSchemeService } from "../service/SchemeService";
 import Scheme from "../model/Scheme";
 import UserSchemeComponent from "./UserSchemeComponent";
 
-
 const SchemeComponent = () => {
 
     const [schemeData, setSchemeData] = useState(new Scheme());
 
+
     const dispatch = useDispatch();
 
     const schemeDelete = useSelector((state) => state.scheme.schemeDelete);
-
 
     const handleSchemeData = (e) => {
         console.log("handleSchemeData");
@@ -22,7 +21,6 @@ const SchemeComponent = () => {
             [e.target.name]: e.target.value
         });
     }
-
 
 
     // --------------------------------------------------------------------------------
@@ -67,9 +65,9 @@ const SchemeComponent = () => {
 
     return (
         <div>
-            
+
             <UserSchemeComponent />
-            
+
             <div className="container">
 
                 <div id="accordion">
@@ -187,12 +185,9 @@ const SchemeComponent = () => {
                                             </div>
                                         </div>
 
-                                        {/* <div class="form-group row">
-                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Course Id</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" class="form-control" id="courseId" name="courseId" value={schemeData.trainingCourse} onChange={handleSchemeData} />
-                                        </div>
-                                    </div> */}
+                                        
+
+
 
 
 

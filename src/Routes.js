@@ -6,7 +6,6 @@ import Register from "./components/Register";
 import Home from './components/Home';
 import Page404 from './components/Page404';
 import Logout from './components/Logout';
-import Footer from './components/Footer';
 import UserSchemeComponent from './components/UserSchemeComponent';
 import SchemeComponent from './components/SchemeComponent';
 import NgoComponent from './components/NgoComponent';
@@ -15,6 +14,8 @@ import TrainingCourseComponent from './components/TrainingCourseComponent';
 import UserTrainingCourseComponent from './components/UserTrainingCourseComponent';
 import FeedbackComponent from './components/FeedbackComponent';
 import UserFeedbackComponent from './components/UserFeedbackComponent';
+import TraineeComponent from './components/TraineeComponent';
+import UserTraineeComponent from './components/UserTraineeComponent';
 
 
 
@@ -43,11 +44,13 @@ const Routes = () => {
 
                             <Route path="/feedbackcomponent"> <FeedbackComponent /> </Route>
                             <Route path="/userfeedbackcomponent"> <UserFeedbackComponent /> </Route>
-                            
+
+                            <Route path="/traineecomponent"> <TraineeComponent /> </Route>
+                            <Route path="/usertraineecomponent"> <UserTraineeComponent /> </Route>
+
                             <Route path="/*"> <Page404 /> </Route>
                         </Switch>
                     </div>
-                    {/* <Footer /> */}
                 </div>
             </Router>
         </div>

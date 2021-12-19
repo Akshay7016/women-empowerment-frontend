@@ -38,7 +38,7 @@ const Header = () => {
                                     <Link className="nav-link" to="/trainingcoursecomponent" >Training-Course</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/#" >Trainee</Link>
+                                    <Link className="nav-link" to="/traineecomponent" >Trainee</Link>
                                 </li>
                                  <li className="nav-item">
                                     <Link className="nav-link" to="/ngocomponent" >Ngo</Link>
@@ -82,7 +82,7 @@ const Header = () => {
                                     <Link className="nav-link" to="/usertrainingcoursecomponent" >Training-Course</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/#" >Trainee</Link>
+                                    <Link className="nav-link" to="/usertraineecomponent" >Trainee</Link>
                                 </li>
                                  <li className="nav-item">
                                     <Link className="nav-link" to="/userngocomponent" >Ngo</Link>

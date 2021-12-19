@@ -78,7 +78,7 @@ const UserTrainingCourseComponent = () => {
     return (
         <div className="container">
             <br />
-            <h1 className="display-3 text-primary mt-3 mb-3 font-weight-bold text-center" >TrainingCourse Component  </h1>
+            <h1 className="display-3 text-primary mt-3 mb-3 font-weight-bold text-center" >TrainingCourse Component</h1>
             <br />
 
             <div class="accordion" id="accordionExample">
